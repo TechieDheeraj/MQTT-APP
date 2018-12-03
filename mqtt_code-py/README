@@ -1,0 +1,12 @@
+sudo apt-get install python3-pip
+
+pip3 install paho-mqtt 		# If not Working Follow below Three Steps: 
+	
+		OR 
+			
+	tar -xvzf paho-mqtt-1.4.0.tar.gz 
+	chmod +x setup.py
+	sudo python3 setup.py install
+
+
+sudo apt-get install python3-tk

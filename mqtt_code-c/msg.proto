@@ -1,0 +1,16 @@
+syntax = "proto2";
+
+message mack
+{
+	required int32  transactionID		=1;     //increment counter
+	optional string TA_name			=2;
+	required int32  messageType  		=3; // 1
+	optional int32  test_duration		=4;
+	optional int32  result_duration		=5;
+	optional string binary_name		=6;
+	optional string binary_argument_list	=7;
+	optional string result 			=8;
+	optional string payload 		=9;
+
+}
+
