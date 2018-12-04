@@ -20,7 +20,6 @@ def on_disconnect(client, userdata, rc):
 	
 def on_publish(client, userdata, mid):
 	print("Successfully published userdata %s: mid: %s" % (str(userdata), str(mid)))
-	client.subscribe(UPSTREAM_TOPIC)
 
 def on_subscribe(client, userdata, mid, granted_qos): 
 	print("Successfully subscribed Userdata: %s : granted_qos: %s" % (str(userdata), str(granted_qos)))
@@ -29,7 +28,6 @@ def on_message(client, userdata, msg):
 	msg.payload = msg.payload.decode("utf-8")
 	print("Got Message: Topic: %s Msg: %s" % (str(msg.topic),str(msg.payload)))
 	payload="THIS IS DOWNSTREAM REPLY"
-	client.unsubscribe(UPSTREAM_TOPIC)
 	time.sleep(1)
 	client.publish(DOWNSTREAM_TOPIC, payload, qos=QOS, retain=False)
 

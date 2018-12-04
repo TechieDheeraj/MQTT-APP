@@ -2,89 +2,56 @@
 from tkinter import *
 
 window = Tk()
-window.geometry('350x200')
+window.geometry('400x300')
 window.title("Dheeraj Chat")
 
 lbl = Label(window, text = "WELCOME TO MY APP")
 #lbl.grid(column=0, row=0)
-lbl.pack(side=TOP)
+lbl.pack(side=TOP, fill=X)
 
 messages_frame = Frame(window)
-messages_frame.pack(fill=X)
+messages_frame.pack(side=TOP, fill=X)
 
-
-#my_msg = StringVar()  # For the messages to be sent.
-#my_msg.set("Type your messages here.")
 scrollbar = Scrollbar(window)  # To navigate through past messages.
+
+def select_text_or_copy_text(e):
+	#e.widget.select_range(0, 'end')
+	e.widget.delete(0, 'end')
 
 def send(event):
 	print(entry_field.get())
 	#lbl.configure(text = entry_field.get())
-	msg_list.insert(END, entry_field.get())
+	#msg_list.insert(END, entry_field.get())
+	msg_list.insert(END, my_msg.get())
 
-####
-msg_list = Listbox(window, height=15, width=50, yscrollcommand=scrollbar.set)
+# To Read Msg in Text Form
+my_msg=StringVar()
+my_msg.set("Type your message here")
+
+btn_fr = Frame(window)
+btn_fr.pack(side=TOP, fill=X)
+
+btn = Button(btn_fr, text="send", fg="green", bg="black", width=5)
+btn.bind('<Button-1>', send)
+#btn.grid(column=2, row=2)
+btn.pack(anchor=NE, padx=5)
+
+msg_list = Listbox(window, height=10, width=40, yscrollcommand=scrollbar.set)
 scrollbar.pack(side=RIGHT, fill=Y)
 #scrollbar.grid(column=4, row=1)
-msg_list.pack(side=TOP, fill=Y)
-####
+msg_list.pack(anchor=CENTER, fill=Y, expand=True)
 
-#entry_field = Entry(window, textvariable=my_msg, width=30)
 
 lbl1 = Label(messages_frame, text="Message Box", width=11)
 lbl1.pack(side=LEFT, padx=0, pady=0)
 
-entry_field = Entry(messages_frame, width=20)
-#entry_field = Entry(window, width=30)
+entry_field = Entry(messages_frame, textvariable=my_msg, width=25)
 entry_field.bind("<Return>", send)
-#entry_field.grid(column=0, row=2)
+#entry_field.bind('<Control-a>', select_text_or_copy_text)
+#entry_field.bind("<Control-c>", select_text_or_copy_text)
+entry_field.bind('<Delete>', select_text_or_copy_text)
 entry_field.focus()
-#entry_field.pack(side=TOP, fill=Y)
-entry_field.pack(side=LEFT, padx=5, fill=X)
-
-
-#btn = Button(window, text="send", command=send)
-btn = Button(window, text="send")
-btn.bind('<Button-1>', send)
-#btn.grid(column=2, row=2)
-btn.pack(side=RIGHT, fill=None)
+entry_field.pack(side=TOP, padx=5, fill=X, expand=True)
 
 
 window.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#messages_frame = tkinter.Frame(top)
-#my_msg = tkinter.StringVar()  # For the messages to be sent.
-#my_msg.set("Type your messages here.")
-#scrollbar = tkinter.Scrollbar(messages_frame)  # To navigate through past messages.
-
-#msg_list = tkinter.Listbox(messages_frame, height=15, width=50, yscrollcommand=scrollbar.set)
-#scrollbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
-#msg_list.pack(side=tkinter.LEFT, fill=tkinter.BOTH)
-#msg_list.pack()
-#messages_frame.pack()
-
-#entry_field = tkinter.Entry(top, textvariable=my_msg)
-#entry_field.bind("<Return>", send)
-#entry_field.pack()
-#send_button = tkinter.Button(top, text="Send", command=send)
-#send_button.pack()
-#top.protocol("WM_DELETE_WINDOW", on_closing)
-

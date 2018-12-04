@@ -18,7 +18,7 @@ Name = input("Enter Your Name: ")
 
 window = Tk()
 window.geometry('400x300')
-window.title("%s's Chat" % Name)
+window.title("Dheeraj Chat")
 
 lbl = Label(window, text = "WELCOME TO MY APP")
 #lbl.grid(column=0, row=0)
@@ -35,7 +35,7 @@ def select_text_or_copy_text(e):
 def send(event):
 	payload= Name + ": " + my_msg.get()	
 	time.sleep(0.5)
-	client.publish(UPSTREAM_TOPIC, payload, qos=QOS, retain=False)
+	client.publish(DOWNSTREAM_TOPIC, payload, qos=QOS, retain=False)
 	msg_list.insert(END, payload)
 
 # To Read Msg in Text Form
@@ -65,7 +65,7 @@ entry_field.pack(side=TOP, padx=5, fill=X, expand=True)
 
 def on_connect(client, userdata, flags, rc):
 	msg_list.insert(END, "%s : Connected Successfully" % Name)
-	client.subscribe(DOWNSTREAM_TOPIC)
+	client.subscribe(UPSTREAM_TOPIC)
 
 def on_disconnect(client, userdata, rc):
 	msg_list.insert(END, "%s : Disconnected from Chat" % Name)
